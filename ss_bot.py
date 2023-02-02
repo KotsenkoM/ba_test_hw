@@ -19,6 +19,7 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message):
+    '''Отправка стартового сообщения пользователю при запуске бота'''
     await message.reply(
         'Привет! Отправь мне ссылку, я сделаю скриншот и сохраню код ответа страницы.'
     )
@@ -26,6 +27,8 @@ async def send_welcome(message):
 
 @dp.message_handler(content_types=['text'])
 async def take_screenshot(message):
+    '''Создание скриншота страницы по ссылке, отправленной пользователем боту.
+    Полученный скриншот и код страницы отправляется обратно пользователю.'''
     url = message.text
     ss = urlparse(url).netloc
     timestamp = time.strftime('%Y-%m-%d_%H:%M')
